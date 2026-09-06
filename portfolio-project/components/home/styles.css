@@ -1,4 +1,4 @@
-/*most of the code can be copied to other css files to keep the styles normal*/
+/*start of copiable code*/
 .logo {
     display: flex;
     align-items: center;
@@ -35,7 +35,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -43,7 +43,68 @@ header {
 }
 
 h1 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: bold;
     margin: 0;
+}
+
+footer {
+    padding: 1.5rem 0;
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid black;
+}
+
+.footernav ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footernav a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.footernav a:hover {
+    color: #fc9803;
+    transition: 0.3s ease;
+}
+/*end of copiable code */
+h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+h3 {
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+main {
+    width: 90%;
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+section p {
+    max-width: 80ch;
+    line-height: 1.6;
+    font-size: 1rem;
 }
