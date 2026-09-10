@@ -3,34 +3,34 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Lucas Hadfield Portfolio</title>
+        <title>Lucas Hadfield Portfolio - Home</title>
         <meta name="description" content="Lucas Hadfield's online web portfolio showcasing his skills, 
         projects, and experience in web development and IT Study.">
-        <link rel="stylesheet" href="/portfolio-project/assets/global-styles/reset.css">
-        <link rel="stylesheet" href="/portfolio-project/assets/global-styles/colors.css">
+        <link rel="stylesheet" href="../../assets/global-styles/reset.css">
+        <link rel="stylesheet" href="../../assets/global-styles/colors.css">
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
         <!--Header, site logo/name and navbar goes here-->
         <header>
             <div class="logo">
-                <img src="/portfolio-project/assets/images/site logo.webp" alt="My dogs silly face as the Site Logo">
+                <img src="../../assets/images/site logo.webp" alt="My dogs silly face as the Site Logo">
                 <h1>Lucas Hadfield Portfolio</h1>
             </div>
-            <div class="navbar">
+            <nav class="navbar" aria-label="Main Navigation">
                 <ul>
-                    <li><a href="/portfolio-project/components/home/index.html">Home</a></li>
-                    <li><a href="/portfolio-project/components/projects/index.html">Projects</a></li>
-                    <li><a href="/portfolio-project/components/about-me/index.html">About Me</a></li>
-                    <li><a href="/portfolio-project/components/contact-me/index.html">Contact Me</a></li>
+                    <li><a href="../home/index.html" aria-current="page">Home</a></li>
+                    <li><a href="../projects/index.html">Projects</a></li>
+                    <li><a href="../about-me/index.html">About Me</a></li>
+                    <li><a href="../contact-me/index.html">Contact Me</a></li>
                 </ul>
-            </div>
+            </nav>
         </header>
         <!-- Home page content goes here -->
         <main>
             <h2>Home</h2>
-            <section>
-                <h3>Welcome to My Portfolio!</h3>
+            <section aria-labelledby="welcome-heading">
+                <h3 id="welcome-heading">Welcome to My Portfolio!</h3>
                 <p>
                     Hello and welcome to my online portfolio! My name is Lucas Hadfield, I am a student and aspiring web developer with a passion for technology
                     and website design! On this website you will find information about me, my past experiences and future aspriations as well as some projects
@@ -47,14 +47,14 @@
         </main>
         <footer>
             <!--Extra information, copyright and additional navigation goes here-->
-            <div class="footernav">
+            <nav class="footernav" aria-label="Footer Navigation">
                 <ul>
-                    <li><a href="/portfolio-project/components/home/index.html">Home</a></li>
-                    <li><a href="/portfolio-project/components/projects/index.html">Projects</a></li>
-                    <li><a href="/portfolio-project/components/about-me/index.html">About Me</a></li>
-                    <li><a href="/portfolio-project/components/contact-me/index.html">Contact Me</a></li>
+                    <li><a href="../home/index.html" aria-current="page">Home</a></li>
+                    <li><a href="../projects/index.html">Projects</a></li>
+                    <li><a href="../about-me/index.html">About Me</a></li>
+                    <li><a href="../contact-me/index.html">Contact Me</a></li>
                 </ul>
-            </div>
+            </nav>
             <p>© 2026 - Lucas Hadfield - lolololol</p> <!--Note: Not actually real copyright XD-->    
         </footer>
     </body>
