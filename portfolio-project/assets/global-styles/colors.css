@@ -1,0 +1,61 @@
+body {
+    background-color: #FAFAFA;
+    color: #222222;
+}
+
+h1, h2, h3, h4 {
+    color: #2C3E50;
+}
+
+a {
+    color: #2C3E50;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #FDBD5D;
+}
+
+header {
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+footer {
+    background-color: #2C3E50;
+    color: #FFFFFF;
+    border-top: none;
+}
+
+footer a {
+    color: #FFFFFF;
+}
+
+footer a:hover {
+    color: #FDBD5D;
+}
+
+button[type="submit"] {
+    background-color: #FDBD5D;
+    color: #2C3E50;
+    font-weight: 700;
+}
+
+button[type="submit"]:hover {
+    background-color: #e5a748;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: #FDBD5D;
+    box-shadow: 0 0 0 3px rgba(253, 189, 93, 0.3);
+}
+
+.project-grid li,
+form {
+    background-color: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
