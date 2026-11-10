@@ -53,8 +53,7 @@ textarea:focus {
     box-shadow: 0 0 0 3px rgba(253, 189, 93, 0.3);
 }
 
-.project-grid li,
-form {
+.project-grid li {
     background-color: #FFFFFF;
     border: 1px solid #E0E0E0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
