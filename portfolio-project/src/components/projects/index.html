@@ -37,6 +37,30 @@
                     self-directed study of various coding languages such as JavaScript, HTML, CSS, MySQL and more. This page will be updated
                     with new projects as my learning progresses, so watch this space!
                 </p>
+                <!-- This section allows me to insert a new project -->
+                <button type="button" id="open-project-form">Add Project</button>
+                <div id="project-form-modal" class="project-modal">
+                    <div class="project-modal-content">
+                        <button type="button" id="close-project-form" class="close-modal">
+                            &times;
+                        </button>
+                        
+                        <h3>Add a Project</h3>
+                        <form id="add-project-form">
+                            <label for="project-title">Project Title</label>
+                            <input type="text" id="project-title" required>
+
+                            <label for="project-description">Description</label>
+                            <textarea id="project-description" required></textarea>
+
+                            <label for="project-image">Image Path</label>
+                            <input type="text" id="project-image" required>
+
+                            <button type="submit">Add Project</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- This unordered list has been changed to be dynamically populated -->
                 <ul class="project-grid" id="project-list">
                 </ul>
             </section>

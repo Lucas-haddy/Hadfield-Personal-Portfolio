@@ -162,7 +162,141 @@ section .project-grid {
     margin-top: 0.75rem;
     text-align: left;
 }
+/* Add Project Button */
 
+#open-project-form {
+    display: block;
+    margin: 1.5rem auto;
+    padding: 0.75rem 1.5rem;
+
+    border: none;
+    border-radius: 6px;
+
+    background-color: #fc9803;
+    color: white;
+
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+#open-project-form:hover {
+    background-color: #e88900;
+    transform: translateY(-2px);
+}
+
+
+/* Project Form Modal */
+
+.project-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    inset: 0;
+
+    background-color: rgba(0, 0, 0, 0.5);
+
+    align-items: center;
+    justify-content: center;
+}
+
+.project-modal-content {
+    position: relative;
+
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 2rem;
+    box-sizing: border-box;
+
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.project-modal-content h3 {
+    margin-top: 0;
+}
+
+.close-modal {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+
+    border: none;
+    background: none;
+
+    font-size: 1.75rem;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    color: #fc9803;
+}
+
+
+/* Form */
+
+#add-project-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+#add-project-form label {
+    font-weight: bold;
+    margin-top: 0.5rem;
+    text-align: left;
+}
+
+#add-project-form input,
+#add-project-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem;
+
+    font: inherit;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+#add-project-form textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+#add-project-form input:focus,
+#add-project-form textarea:focus {
+    outline: 2px solid #fc9803;
+    outline-offset: 1px;
+    border-color: #fc9803;
+}
+
+#add-project-form button[type="submit"] {
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+
+    border: none;
+    border-radius: 6px;
+
+    background-color: #fc9803;
+    color: white;
+
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#add-project-form button[type="submit"]:hover {
+    background-color: #e88900;
+}
 /*Media Queries Below*/
 @media (max-width: 768px) {
     header {
