@@ -1,23 +1,26 @@
-import { db, collection, getDocs, addDoc } from '../../firebase/init.js';
+import { db, collection, onSnapshot, addDoc } from '../../firebase/init.js';
 
 // Read Operation ↓
 const projectList = document.getElementById('project-list');
 
 const projectsRef = collection(db, 'projects');
-const snapshot = await getDocs(projectsRef);
 
-snapshot.forEach((doc) => {
-    const project = doc.data();
+onSnapshot(projectsRef, (snapshot) => {
+    projectList.innerHTML = '';
 
-    const li = document.createElement('li');
+    snapshot.forEach((doc) => {
+        const project = doc.data();
 
-    li.innerHTML = `
-        <h4>${project.title}</h4>
-        <img src="${project.image}" alt="${project.title}">
-        <p>${project.description}</p>
-    `;
+        const li = document.createElement('li');
 
-    projectList.appendChild(li);
+        li.innerHTML = `
+            <h4>${project.title}</h4>
+            <img src="${project.image}" alt="${project.title}">
+            <p>${project.description}</p>
+        `;
+
+        projectList.appendChild(li);
+    });
 });
 
 // Modal controls ↓
