@@ -59,7 +59,8 @@ textarea:focus {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-#google-login {
+#google-login,
+#logout {
     padding: 0.75rem 1.5rem;
 
     border: none;
@@ -75,7 +76,8 @@ textarea:focus {
     transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-#google-login:hover {
+#google-login:hover,
+#logout:hover {
     background-color: #e88900;
     transform: translateY(-2px);
 }
