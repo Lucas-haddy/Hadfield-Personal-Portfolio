@@ -1,4 +1,4 @@
-import { db, collection, onSnapshot, addDoc } from '../../firebase/init.js';
+import { db, collection, doc, getDoc, onSnapshot, addDoc, updateDoc } from '../../firebase/init.js';
 
 // Read Operation ↓
 const projectList = document.getElementById('project-list');
@@ -17,6 +17,7 @@ onSnapshot(projectsRef, (snapshot) => {
             <h4>${project.title}</h4>
             <img src="${project.image}" alt="${project.title}">
             <p>${project.description}</p>
+            <button type="button" class="edit-project" data-id="${doc.id}">Edit</button>
         `;
 
         projectList.appendChild(li);
@@ -46,12 +47,49 @@ addProjectForm.addEventListener('submit', async (event) => {
     const description = document.getElementById('project-description').value;
     const image = document.getElementById('project-image').value;
 
-    await addDoc(collection(db, 'projects'), {
-        title: title,
-        description: description,
-        image: image
-    });
+    if (editingProjectId) {
+        const projectRef = doc(db, 'projects', editingProjectId);
 
+        await updateDoc(projectRef, {
+            title: title,
+            description: description,
+            image: image
+        });
+    } else {
+        await addDoc(collection(db, 'projects'), {
+            title: title,
+            description: description,
+            image: image
+        });
+    }
+
+    editingProjectId = null;
     addProjectForm.reset();
     projectFormModal.style.display = 'none';
+});
+
+// Edit Operation ↓
+let editingProjectId = null;
+
+projectList.addEventListener('click', async (event) => {
+    const editButton = event.target.closest('.edit-project');
+
+    if (!editButton) {
+        return;
+    }
+
+    editingProjectId = editButton.dataset.id;
+
+    const projectRef = doc(db, 'projects', editingProjectId);
+    const projectSnapshot = await getDoc(projectRef);
+
+    if (projectSnapshot.exists()) {
+        const project = projectSnapshot.data();
+
+        document.getElementById('project-title').value = project.title;
+        document.getElementById('project-description').value = project.description;
+        document.getElementById('project-image').value = project.image;
+
+        projectFormModal.style.display = 'flex';
+    }
 });
