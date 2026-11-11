@@ -1,4 +1,4 @@
-import { db, collection, doc, getDoc, onSnapshot, addDoc, updateDoc } from '../../firebase/init.js';
+import { db, collection, doc, getDoc, onSnapshot, addDoc, updateDoc, deleteDoc } from '../../firebase/init.js';
 
 // Read Operation ↓
 const projectList = document.getElementById('project-list');
@@ -18,6 +18,7 @@ onSnapshot(projectsRef, (snapshot) => {
             <img src="${project.image}" alt="${project.title}">
             <p>${project.description}</p>
             <button type="button" class="edit-project" data-id="${doc.id}">Edit</button>
+            <button type="button" class="delete-project" data-id="${doc.id}">Delete</button>
         `;
 
         projectList.appendChild(li);
@@ -92,4 +93,24 @@ projectList.addEventListener('click', async (event) => {
 
         projectFormModal.style.display = 'flex';
     }
+});
+
+// Delete Operation ↓
+projectList.addEventListener('click', async (event) => {
+    const deleteButton = event.target.closest('.delete-project');
+
+    if (!deleteButton) {
+        return;
+    }
+
+    const confirmed = confirm('Are you sure you want to delete this project?');
+
+    if (!confirmed) {
+        return;
+    }
+
+    const projectId = deleteButton.dataset.id;
+    const projectRef = doc(db, 'projects', projectId);
+
+    await deleteDoc(projectRef);
 });
