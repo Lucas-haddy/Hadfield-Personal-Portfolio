@@ -34,10 +34,17 @@ onAuthStateChanged(auth, (user) => {
         userInfo.textContent = `Signed in as ${user.displayName}`;
         googleLogin.style.display = 'none';
         logout.style.display = 'inline-block';
+
+        if (user.uid === '6HTSv9H6S6WmxZ7MrBPqUxUfdoo2') {
+            openProjectForm.style.display = 'block';
+        } else {
+            openProjectForm.style.display = 'none';
+        }
     } else {
         userInfo.textContent = 'Not signed in';
         googleLogin.style.display = 'inline-block';
         logout.style.display = 'none';
+        openProjectForm.style.display = 'none';
     }
 });
 
@@ -58,9 +65,14 @@ onSnapshot(projectsRef, (snapshot) => {
             <h4>${project.title}</h4>
             <img src="${project.image}" alt="${project.title}">
             <p>${project.description}</p>
-            <button type="button" class="edit-project" data-id="${doc.id}">Edit</button>
-            <button type="button" class="delete-project" data-id="${doc.id}">Delete</button>
         `;
+        // Hide Edit/Delete buttons if the user isn't ME
+        if (auth.currentUser && auth.currentUser.uid === '6HTSv9H6S6WmxZ7MrBPqUxUfdoo2') {
+            li.innerHTML += `
+                <button type="button" class="edit-project" data-id="${doc.id}">Edit</button>
+                <button type="button" class="delete-project" data-id="${doc.id}">Delete</button>
+            `;
+        }
 
         projectList.appendChild(li);
     });
