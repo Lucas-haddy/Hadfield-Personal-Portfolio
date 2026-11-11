@@ -58,3 +58,24 @@ textarea:focus {
     border: 1px solid #E0E0E0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
+
+#google-login {
+    padding: 0.75rem 1.5rem;
+
+    border: none;
+    border-radius: 6px;
+
+    background-color: #fc9803;
+    color: white;
+
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+#google-login:hover {
+    background-color: #e88900;
+    transform: translateY(-2px);
+}

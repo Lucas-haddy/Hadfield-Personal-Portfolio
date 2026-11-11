@@ -1,4 +1,45 @@
-import { db, collection, doc, getDoc, onSnapshot, addDoc, updateDoc, deleteDoc } from '../../firebase/init.js';
+import { 
+    db, 
+    auth, 
+    GoogleAuthProvider, 
+    signInWithPopup, 
+    signOut, 
+    onAuthStateChanged, 
+    collection, 
+    doc, 
+    getDoc, 
+    onSnapshot, 
+    addDoc, 
+    updateDoc, 
+    deleteDoc 
+} from '../../firebase/init.js';
+
+// Google Authentication Login ↓
+const googleLogin = document.getElementById('google-login');
+const logout = document.getElementById('logout');
+const userInfo = document.getElementById('user-info');
+
+googleLogin.addEventListener('click', async () => {
+    const provider = new GoogleAuthProvider();
+
+    await signInWithPopup(auth, provider);
+});
+
+logout.addEventListener('click', async () => {
+    await signOut(auth);
+});
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        userInfo.textContent = `Signed in as ${user.displayName}`;
+        googleLogin.style.display = 'none';
+        logout.style.display = 'inline-block';
+    } else {
+        userInfo.textContent = 'Not signed in';
+        googleLogin.style.display = 'inline-block';
+        logout.style.display = 'none';
+    }
+});
 
 // Read Operation ↓
 const projectList = document.getElementById('project-list');
