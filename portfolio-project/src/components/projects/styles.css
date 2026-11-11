@@ -162,6 +162,29 @@ section .project-grid {
     margin-top: 0.75rem;
     text-align: left;
 }
+
+/* Edit Button CSS */
+.edit-project {
+    margin-top: auto;
+    padding: 0.6rem 1rem;
+
+    border: none;
+    border-radius: 6px;
+
+    background-color: #fc9803;
+    color: white;
+
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.edit-project:hover {
+    background-color: #e88900;
+    transform: translateY(-2px);
+}
 /* Add Project Button */
 
 #open-project-form {
