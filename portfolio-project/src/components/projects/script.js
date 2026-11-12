@@ -214,3 +214,57 @@ projectList.addEventListener('submit', async (event) => {
 
     commentInput.value = '';
 });
+
+// Show comments when they are made and allow users to edit their comments ↓
+onSnapshot(commentsRef, (snapshot) => {
+    const comments = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data()
+    }));
+
+    document.querySelectorAll('.project-grid li').forEach((li) => {
+        const commentList = li.querySelector('.comment-list');
+        const projectId = li.querySelector('.comment-form').dataset.projectId;
+
+        commentList.innerHTML = '';
+
+        comments
+            .filter((comment) => comment.projectId === projectId)
+            .forEach((comment) => {
+                const commentElement = document.createElement('div');
+
+                commentElement.innerHTML = `
+                    <p>${comment.userName}: ${comment.text}</p>
+                `;
+
+                if (auth.currentUser && auth.currentUser.uid === comment.userId) {
+                    commentElement.innerHTML += `
+                        <button type="button" class="edit-comment" data-id="${comment.id}">Edit</button>
+                        <button type="button" class="delete-comment" data-id="${comment.id}">Delete</button>
+                    `;
+                }
+
+                commentList.appendChild(commentElement);
+            });
+    });
+});
+
+// Allow users to delete their own comments ↓
+projectList.addEventListener('click', async (event) => {
+    const deleteButton = event.target.closest('.delete-comment');
+
+    if (!deleteButton) {
+        return;
+    }
+
+    const confirmed = confirm('Are you sure you want to delete this comment?');
+
+    if (!confirmed) {
+        return;
+    }
+
+    const commentId = deleteButton.dataset.id;
+    const commentRef = doc(db, 'comments', commentId);
+
+    await deleteDoc(commentRef);
+});
