@@ -320,6 +320,71 @@ section .project-grid {
 #add-project-form button[type="submit"]:hover {
     background-color: #e88900;
 }
+
+/*Project Comment Styles*/
+/* Project Comments */
+
+.project-comments {
+    margin-top: auto;
+    padding-top: 1rem;
+}
+
+.project-comments h5 {
+    margin-bottom: 0.75rem;
+}
+
+.comment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.comment-list > div {
+    padding: 0.5rem;
+    border-radius: 6px;
+    background-color: #f5f5f5;
+}
+
+.comment-list p {
+    margin-bottom: 0.4rem;
+}
+
+.comment-form {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.comment-input {
+    flex: 1;
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font: inherit;
+}
+
+.comment-form button,
+.edit-comment,
+.delete-comment {
+    padding: 0.4rem 0.75rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #fc9803;
+    color: white;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.comment-form button:hover,
+.edit-comment:hover,
+.delete-comment:hover {
+    background-color: #e88900;
+    transform: translateY(-1px);
+}
+
 /*Media Queries Below*/
 @media (max-width: 768px) {
     header {

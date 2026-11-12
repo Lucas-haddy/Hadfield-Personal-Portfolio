@@ -215,7 +215,7 @@ projectList.addEventListener('submit', async (event) => {
     commentInput.value = '';
 });
 
-// Show comments when they are made and allow users to edit their comments ↓
+// Show comments when they are made ↓
 onSnapshot(commentsRef, (snapshot) => {
     const comments = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -267,4 +267,39 @@ projectList.addEventListener('click', async (event) => {
     const commentRef = doc(db, 'comments', commentId);
 
     await deleteDoc(commentRef);
+});
+
+// Allow users to edit their own comments ↓
+projectList.addEventListener('click', async (event) => {
+    const editButton = event.target.closest('.edit-comment');
+
+    if (!editButton) {
+        return;
+    }
+
+    const commentId = editButton.dataset.id;
+    const commentRef = doc(db, 'comments', commentId);
+    const commentSnapshot = await getDoc(commentRef);
+
+    if (!commentSnapshot.exists()) {
+        return;
+    }
+
+    const comment = commentSnapshot.data();
+
+    const newText = prompt('Edit your comment:', comment.text);
+
+    if (newText === null) {
+        return;
+    }
+
+    const trimmedText = newText.trim();
+
+    if (!trimmedText) {
+        return;
+    }
+
+    await updateDoc(commentRef, {
+        text: trimmedText
+    });
 });
