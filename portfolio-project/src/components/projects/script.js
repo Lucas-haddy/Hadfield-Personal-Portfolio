@@ -65,7 +65,20 @@ onSnapshot(projectsRef, (snapshot) => {
             <h4>${project.title}</h4>
             <img src="${project.image}" alt="${project.title}">
             <p>${project.description}</p>
+            
+            <div class="project-comments">
+                <h5>Comments</h5>
+                <div class="comment-list"></div>
+
+                <form class="comment-form">
+                    <input type="text" class="comment-input" placeholder="Leave a comment..." required>
+                    <button type="submit">Comment</button>
+                </form>
+            </div>
         `;
+        
+        li.querySelector('.comment-form').dataset.projectId = doc.id;
+
         // Hide Edit/Delete buttons if the user isn't ME
         if (auth.currentUser && auth.currentUser.uid === '6HTSv9H6S6WmxZ7MrBPqUxUfdoo2') {
             li.innerHTML += `
@@ -166,4 +179,38 @@ projectList.addEventListener('click', async (event) => {
     const projectRef = doc(db, 'projects', projectId);
 
     await deleteDoc(projectRef);
+});
+
+// Comment event Listener ↓
+const commentsRef = collection(db, 'comments');
+
+projectList.addEventListener('submit', async (event) => {
+    const form = event.target.closest('.comment-form');
+
+    if (!form) {
+        return;
+    }
+
+    event.preventDefault();
+
+    if (!auth.currentUser) {
+        alert('You must be signed in to comment.');
+        return;
+    }
+
+    const commentInput = form.querySelector('.comment-input');
+    const text = commentInput.value.trim();
+
+    if (!text) {
+        return;
+    }
+
+    await addDoc(commentsRef, {
+        projectId: form.dataset.projectId,
+        userId: auth.currentUser.uid,
+        userName: auth.currentUser.displayName,
+        text: text
+    });
+
+    commentInput.value = '';
 });
