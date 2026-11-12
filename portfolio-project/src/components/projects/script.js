@@ -25,39 +25,34 @@ googleLogin.addEventListener('click', async () => {
     await signInWithPopup(auth, provider);
 });
 
+// Signout event Listener ↓
 logout.addEventListener('click', async () => {
+    const confirmed = confirm('Are you sure you want to log out?');
+
+    if (!confirmed) {
+        return;
+    }
+
     await signOut(auth);
 });
 
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        userInfo.textContent = `Signed in as ${user.displayName}`;
-        googleLogin.style.display = 'none';
-        logout.style.display = 'inline-block';
-
-        if (user.uid === '6HTSv9H6S6WmxZ7MrBPqUxUfdoo2') {
-            openProjectForm.style.display = 'block';
-        } else {
-            openProjectForm.style.display = 'none';
-        }
-    } else {
-        userInfo.textContent = 'Not signed in';
-        googleLogin.style.display = 'inline-block';
-        logout.style.display = 'none';
-        openProjectForm.style.display = 'none';
-    }
-});
-
-// Read Operation ↓
+// Project list and modal controls ↓
 const projectList = document.getElementById('project-list');
+const projectFormModal = document.getElementById('project-form-modal');
+const openProjectForm = document.getElementById('open-project-form');
+const closeProjectForm = document.getElementById('close-project-form');
 
 const projectsRef = collection(db, 'projects');
 
-onSnapshot(projectsRef, (snapshot) => {
+let currentProjects = [];
+
+// Display projects ↓
+function displayProjects() {
     projectList.innerHTML = '';
 
-    snapshot.forEach((doc) => {
-        const project = doc.data();
+    currentProjects.forEach((projectData) => {
+        const project = projectData.data;
+        const projectId = projectData.id;
 
         const li = document.createElement('li');
 
@@ -76,26 +71,54 @@ onSnapshot(projectsRef, (snapshot) => {
                 </form>
             </div>
         `;
-        
-        li.querySelector('.comment-form').dataset.projectId = doc.id;
+
+        li.querySelector('.comment-form').dataset.projectId = projectId;
 
         // Hide Edit/Delete buttons if the user isn't ME
         if (auth.currentUser && auth.currentUser.uid === '6HTSv9H6S6WmxZ7MrBPqUxUfdoo2') {
             li.innerHTML += `
-                <button type="button" class="edit-project" data-id="${doc.id}">Edit</button>
-                <button type="button" class="delete-project" data-id="${doc.id}">Delete</button>
+                <button type="button" class="edit-project" data-id="${projectId}">Edit</button>
+                <button type="button" class="delete-project" data-id="${projectId}">Delete</button>
             `;
         }
 
         projectList.appendChild(li);
     });
+}
+
+// Read Operation ↓
+onSnapshot(projectsRef, (snapshot) => {
+    currentProjects = snapshot.docs.map((projectDoc) => ({
+        id: projectDoc.id,
+        data: projectDoc.data()
+    }));
+
+    displayProjects();
+});
+
+// Authentication state ↓
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        userInfo.textContent = `Signed in as ${user.displayName}`;
+        googleLogin.style.display = 'none';
+        logout.style.display = 'inline-block';
+
+        if (user.uid === '6HTSv9H6S6WmxZ7MrBPqUxUfdoo2') {
+            openProjectForm.style.display = 'block';
+        } else {
+            openProjectForm.style.display = 'none';
+        }
+    } else {
+        userInfo.textContent = 'Not signed in';
+        googleLogin.style.display = 'inline-block';
+        logout.style.display = 'none';
+        openProjectForm.style.display = 'none';
+    }
+
+    displayProjects();
 });
 
 // Modal controls ↓
-const projectFormModal = document.getElementById('project-form-modal');
-const openProjectForm = document.getElementById('open-project-form');
-const closeProjectForm = document.getElementById('close-project-form');
-
 openProjectForm.addEventListener('click', () => {
     projectFormModal.style.display = 'flex';
 });
