@@ -1,9 +1,6 @@
 import { 
     db, 
     auth, 
-    GoogleAuthProvider, 
-    signInWithPopup, 
-    signOut, 
     onAuthStateChanged, 
     collection, 
     doc, 
@@ -13,28 +10,6 @@ import {
     updateDoc, 
     deleteDoc 
 } from '../../firebase/init.js';
-
-// Google Authentication Login ↓
-const googleLogin = document.getElementById('google-login');
-const logout = document.getElementById('logout');
-const userInfo = document.getElementById('user-info');
-
-googleLogin.addEventListener('click', async () => {
-    const provider = new GoogleAuthProvider();
-
-    await signInWithPopup(auth, provider);
-});
-
-// Signout event Listener ↓
-logout.addEventListener('click', async () => {
-    const confirmed = confirm('Are you sure you want to log out?');
-
-    if (!confirmed) {
-        return;
-    }
-
-    await signOut(auth);
-});
 
 // Project list and modal controls ↓
 const projectList = document.getElementById('project-list');
@@ -96,22 +71,11 @@ onSnapshot(projectsRef, (snapshot) => {
     displayProjects();
 });
 
-// Authentication state ↓
+// Project authentication state ↓
 onAuthStateChanged(auth, (user) => {
-    if (user) {
-        userInfo.textContent = `Signed in as ${user.displayName}`;
-        googleLogin.style.display = 'none';
-        logout.style.display = 'inline-block';
-
-        if (user.uid === '6HTSv9H6S6WmxZ7MrBPqUxUfdoo2') {
-            openProjectForm.style.display = 'block';
-        } else {
-            openProjectForm.style.display = 'none';
-        }
+    if (user && user.uid === '6HTSv9H6S6WmxZ7MrBPqUxUfdoo2') {
+        openProjectForm.style.display = 'block';
     } else {
-        userInfo.textContent = 'Not signed in';
-        googleLogin.style.display = 'inline-block';
-        logout.style.display = 'none';
         openProjectForm.style.display = 'none';
     }
 
