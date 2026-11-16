@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "public": "portfolio-project/src",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "redirects": [
+      {
+        "source": "/",
+        "destination": "/components/home/index.html",
+        "type": 302
+      }
+    ]
+  }
+}
