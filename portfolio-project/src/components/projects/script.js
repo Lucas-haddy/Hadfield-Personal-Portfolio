@@ -4,11 +4,14 @@ import {
     onAuthStateChanged, 
     collection, 
     doc, 
-    getDoc, 
+    getDoc,
+    getDocs, 
     onSnapshot, 
     addDoc, 
     updateDoc, 
-    deleteDoc 
+    deleteDoc,
+    query,
+    where 
 } from '../../firebase/init.js';
 
 // Project list and modal controls ↓
@@ -163,6 +166,18 @@ projectList.addEventListener('click', async (event) => {
     }
 
     const projectId = deleteButton.dataset.id;
+
+    const projectComments = query(
+        commentsRef,
+        where('projectId', '==', projectId)
+    );
+
+    const commentsSnapshot = await getDocs(projectComments);
+
+    for (const comment of commentsSnapshot.docs) {
+        await deleteDoc(doc(db, 'comments', comment.id));
+    }
+
     const projectRef = doc(db, 'projects', projectId);
 
     await deleteDoc(projectRef);
