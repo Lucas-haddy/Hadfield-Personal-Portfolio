@@ -83,8 +83,14 @@ sub, sup {
   position: relative;
   vertical-align: baseline;
 }
-sub { bottom: -0.25em; }
-sup { top: -0.5em; }
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
 
 /* --------------------------------------------------------------------------
    4. Media & Embedded Elements
@@ -156,16 +162,20 @@ table {
   width: 100%;
 }
 
-td, th {
+td,
+th {
   text-align: left;
   vertical-align: top;
 }
 
+/* --------------------------------------------------------------------------
+   7. Reduced Motion
+   -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
     scroll-behavior: auto;
   }
-  
+
   *,
   *::before,
   *::after {
@@ -176,74 +186,139 @@ td, th {
   }
 }
 
-/* ==== 7. Header and Footer */
+/* --------------------------------------------------------------------------
+   8. Header & Footer
+   -------------------------------------------------------------------------- */
 .logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .logo img {
-    width: 4.5rem;
-    height: 4.5rem;
-    object-fit: cover;
-    border-radius: 50%;
+  width: 4.5rem;
+  height: 4.5rem;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .navbar ul {
-    display: flex;
-    gap: 20px;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar a {
-    text-decoration: none;
-    color: inherit;
-    font-weight: 600;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 600;
 }
 
 .navbar a:hover {
-    color: #fc9803;
-    transition: 0.3s ease;
+  color: #fc9803;
+  transition: 0.3s ease;
 }
 
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    border-bottom: 1px solid black;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid black;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: white;
 }
 
 footer {
-    padding: 1.5rem 0;
-    margin-top: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    border-top: 1px solid black;
+  padding: 1.5rem 0;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  border-top: 1px solid black;
 }
 
 .footernav ul {
-    display: flex;
-    gap: 20px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .footernav a {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
 .footernav a:hover {
-    color: #fc9803;
-    transition: 0.3s ease;
+  color: #fc9803;
+  transition: 0.3s ease;
 }
+
+/* --------------------------------------------------------------------------
+   9. Responsive Header & Footer
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  header {
+    padding: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .logo img {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .navbar ul {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  #auth-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  footer {
+    padding: 1.25rem 0;
+  }
+
+  .footernav ul {
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 576px) {
+  header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logo {
+    flex-direction: column;
+  }
+
+  .navbar ul {
+    justify-content: center;
+  }
+
+  #auth-controls {
+    justify-content: center;
+  }
+
+  .footernav ul {
+    gap: 10px;
+  }
+}
+
+/* End of Global CSS */
